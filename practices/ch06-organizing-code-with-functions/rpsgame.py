@@ -75,13 +75,17 @@ def check_for_winning_throw(player_1, player_2, roll1, roll2):
     return winner
 
 def get_roll(player_name, rolls):
-    roll = input(f"{player_name}, what is your roll? [rock, paper, scissors]: ")
-    roll = roll.lower().strip()
-    if roll not in rolls:
-        print(f"Sorry {player_name}, {roll} is not a valid play!")
+    print("Available rolls:")
+    for index, r in enumerate(rolls, start=1):
+        print(f"{index}. {r}")
+    
+    selected_index = int(input(f"{player_name}, what is your roll? ")) - 1
+
+    if selected_index < 0 or selected_index >= len(rolls):
+        print(f"Sorry {player_name}, {selected_index+1} is our of bounds!")
         return None
     
-    return roll
+    return rolls[selected_index]
 
 if __name__ == '__main__':
     main()
